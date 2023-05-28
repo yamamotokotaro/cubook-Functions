@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin';
 const fireStore = admin.firestore();
-const cors = require('cors')({ origin: true });
 
 export default functions.region('asia-northeast1').https.onCall(async (data, context) => {
   let res;
@@ -41,5 +40,7 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
     })
     res = 'success';
     return res;
+  } else {
+    return 'error';
   }
 });
