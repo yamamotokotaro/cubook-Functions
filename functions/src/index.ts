@@ -20,7 +20,6 @@ const funcs: any = {
   lumpCreate: "./modules/trigger/lumpCreate",
   sendnotification: "./modules/trigger/sendnotification",
   sign: "./modules/trigger/sign",
-  slackBotSendEffort: "./modules/trigger/slackBotSendEffort",
   changeGroupUserInfo: "./modules/call/changeGroupUserInfo",
   createGroupCall: "./modules/call/createGroup",
   inviteGroupCall: "./modules/call/inviteGroup",
