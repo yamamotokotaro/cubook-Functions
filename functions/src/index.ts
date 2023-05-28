@@ -22,8 +22,13 @@ const funcs: any = {
   sign: "./modules/trigger/sign",
   changeGroupUserInfo: "./modules/call/changeGroupUserInfo",
   createGroupCall: "./modules/call/createGroup",
+  deleteGroupAccount: "./modules/call/deleteGroupAccount",
+  executeMigrationCall: "./modules/call/executeMigration",
   inviteGroupCall: "./modules/call/inviteGroup",
   joinGroupCall: "./modules/call/joinGroup",
+  rejectMigrationCall: "./modules/call/rejectMigration",
+  sendMigrationCall: "./modules/call/sendMigration",
+
 };
 
 // funcsで定義した内容をexportsに追加する
