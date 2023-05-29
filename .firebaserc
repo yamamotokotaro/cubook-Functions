@@ -13,8 +13,7 @@
     },
     "cubook-3c960": {
       "extensionInstances": {
-        "firestore-send-email-noreply": "cb8522f4adf2c6bb3690f2f9a1c346e781699aa45b29d99a2f17ecaeb7c9af42",
-        "firestore-send-email": "a94cf5d0d2fa75add747b1e7bfc7f0efda4da656a019576070eceb31d30d4a53"
+        "firestore-send-email-noreply": "cb8522f4adf2c6bb3690f2f9a1c346e781699aa45b29d99a2f17ecaeb7c9af42"
       }
     }
   }
