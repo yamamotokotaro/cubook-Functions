@@ -19,7 +19,6 @@ const funcs: any = {
   addLocationToTask: "./modules/https/addLocationToTask",
   lumpCreate: "./modules/trigger/lumpCreate",
   sendnotification: "./modules/trigger/sendnotification",
-  sign: "./modules/trigger/sign",
   changeGroupUserInfo: "./modules/call/changeGroupUserInfo",
   createGroupCall: "./modules/call/createGroup",
   deleteGroupAccount: "./modules/call/deleteGroupAccount",
