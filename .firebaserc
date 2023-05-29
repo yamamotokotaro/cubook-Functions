@@ -8,7 +8,7 @@
   "etags": {
     "cubook-dev": {
       "extensionInstances": {
-        "firestore-send-email-noreply-dev": "60a8d42b7d02dff5d41b9db1f559820daab2d4040a8313a74b2e79815856ec89"
+        "firestore-send-email-noreply": "89fc6f77c0876a5950f01a793e76e4f97cd35c43f7c84c34c5118b4fb2f0bf89"
       }
     },
     "cubook-3c960": {

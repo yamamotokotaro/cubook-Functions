@@ -33,7 +33,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@v11.30.0
         with:
-          args: deploy
+          args: deploy --force
         env:
           GCP_SA_KEY: ${{ steps.cat_key.outputs.key }}
           PROJECT_ID: cubook-dev
