@@ -1,10 +1,11 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin';
-const fireStore = admin.firestore();
+import { getFirestore } from 'firebase-admin/firestore';
 
 export default functions.region('asia-northeast1').https.onCall(async (data, context) => {
+  const db = getFirestore();
   let res;
-  const uid: string = context.auth?.uid || '';
+  const uid = data.uid;
   const family = data.family;
   const first = data.first;
   const team = data.team;
@@ -14,13 +15,13 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
   const age_turn = data.age_turn;
   const call = data.call;
   const group = context.auth?.token.group;
-  const userRef = fireStore.collection('user').where('group', '==', group).where('uid', '==', uid);
+  const userRef = db.collection('user').where('group', '==', group).where('uid', '==', uid);
   const userDoc = await userRef.get()
   if (userDoc === null) {
     return 'No such document!';
   } else if (userDoc !== null) {
     if (team !== null && grade !== null && teamPosition !== null) {
-      const setUserRef = fireStore.collection('user').doc(userDoc.docs[0].id);
+      const setUserRef = db.collection('user').doc(userDoc.docs[0].id);
       await setUserRef.update({
         name: family + first,
         family: family,
@@ -49,7 +50,7 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
       return res;
     }
     else if (team !== null && grade !== null) {
-      const setUserRef = fireStore.collection('user').doc(userDoc.docs[0].id);
+      const setUserRef = db.collection('user').doc(userDoc.docs[0].id);
       await setUserRef.update({
         name: family + first,
         family: family,
@@ -75,7 +76,7 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
       res = 'success';
       return res;
     } else {
-      const setUserRef = fireStore.collection('user').doc(userDoc.docs[0].id);
+      const setUserRef = db.collection('user').doc(userDoc.docs[0].id);
       await setUserRef.update({
         name: family + first,
         family: family,

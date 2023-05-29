@@ -1,7 +1,8 @@
 import * as functions from 'firebase-functions';
-import { firestore } from 'firebase-admin';
+import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 
 export default functions.region('asia-northeast1').https.onCall(async (data, context) => {
+    const db = getFirestore();
     let res;
     const uidToMigration = data.uid;
     const groupIdToMigration = data.groupID;
@@ -11,11 +12,11 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
     const uid = decodedToken.uid;
     const name = decodedToken.name;
     if (isAdmin) {
-        const userRef = firestore().collection('user').where('group', '==', group).where('uid', '==', uidToMigration);
+        const userRef = db.collection('user').where('group', '==', group).where('uid', '==', uidToMigration);
         const docsUser = await
             userRef.get();
         const userSnapshot = docsUser.docs[0];
-        await firestore().collection('log').add({
+        await db.collection('log').add({
             'operator': uid,
             'operatorName': name,
             'type': 'migrateGroupAccount',
@@ -26,10 +27,10 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
             'group': userSnapshot.get('group'),
             'groupToMigration': groupIdToMigration
         });
-        await firestore().collection('migration').add({
+        await db.collection('migration').add({
             'operator': uid,
             'operatorName': name,
-            'time': firestore.Timestamp.now(),
+            'time': Timestamp.now(),
             'phase': 'wait',
             'uid': uidToMigration,
             'name': userSnapshot.get('name'),
