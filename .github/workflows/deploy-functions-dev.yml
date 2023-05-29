@@ -1,4 +1,4 @@
-name: "Deploy to Cloud Functions on PR into develop branch "
+name: "Firebase Deploy to Development "
 "on":
   push:
     branches:
