@@ -1,8 +1,8 @@
-import * as functions from 'firebase-functions'
-import * as admin from 'firebase-admin';
-import { getFirestore } from 'firebase-admin/firestore';
+import * as functions from "firebase-functions"
+import * as admin from "firebase-admin";
+import { getFirestore } from "firebase-admin/firestore";
 
-export default functions.region('asia-northeast1').https.onCall(async (data, context) => {
+export default functions.region("asia-northeast1").https.onCall(async (data, context) => {
   const db = getFirestore();
   let res;
   const uid = data.uid;
@@ -15,13 +15,13 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
   const age_turn = data.age_turn;
   const call = data.call;
   const group = context.auth?.token.group;
-  const userRef = db.collection('user').where('group', '==', group).where('uid', '==', uid);
+  const userRef = db.collection("user").where("group", "==", group).where("uid", "==", uid);
   const userDoc = await userRef.get()
   if (userDoc === null) {
-    return 'No such document!';
+    return "No such document!";
   } else if (userDoc !== null) {
     if (team !== null && grade !== null && teamPosition !== null) {
-      const setUserRef = db.collection('user').doc(userDoc.docs[0].id);
+      const setUserRef = db.collection("user").doc(userDoc.docs[0].id);
       await setUserRef.update({
         name: family + first,
         family: family,
@@ -42,15 +42,15 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
         teamPosition: teamPosition,
         age: age,
         age_turn: age_turn,
-        position: 'scout',
+        position: "scout",
         group: group,
         grade: grade
       })
-      res = 'success';
+      res = "success";
       return res;
     }
     else if (team !== null && grade !== null) {
-      const setUserRef = db.collection('user').doc(userDoc.docs[0].id);
+      const setUserRef = db.collection("user").doc(userDoc.docs[0].id);
       await setUserRef.update({
         name: family + first,
         family: family,
@@ -69,14 +69,14 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
         team: team,
         age: age,
         age_turn: age_turn,
-        position: 'scout',
+        position: "scout",
         group: group,
         grade: grade
       })
-      res = 'success';
+      res = "success";
       return res;
     } else {
-      const setUserRef = db.collection('user').doc(userDoc.docs[0].id);
+      const setUserRef = db.collection("user").doc(userDoc.docs[0].id);
       await setUserRef.update({
         name: family + first,
         family: family,
@@ -90,14 +90,14 @@ export default functions.region('asia-northeast1').https.onCall(async (data, con
         first: first,
         call: call,
         age: age,
-        position: 'scout',
+        position: "scout",
         group: group
       });
-      res = 'success';
+      res = "success";
       return res;
 
     }
   } else {
-    return 'error';
+    return "error";
   }
 });

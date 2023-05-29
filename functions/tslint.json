@@ -87,7 +87,7 @@
     // most values and let for values that will change.
     "no-var-keyword": {"severity": "warning"},
 
-    // Prefer === and !== over == and !=. The latter operators support overloads that are often accidental.
+    // Prefer === and !== over === and !=. The latter operators support overloads that are often accidental.
     "triple-equals": {"severity": "warning"},
 
     // Warn when using deprecated APIs.

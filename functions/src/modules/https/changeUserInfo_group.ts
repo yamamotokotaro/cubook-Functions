@@ -1,9 +1,9 @@
-import * as functions from 'firebase-functions'
-import * as admin from 'firebase-admin';
+import * as functions from "firebase-functions"
+import * as admin from "firebase-admin";
 const fireStore = admin.firestore();
-const cors = require('cors')({origin: true});
+const cors = require("cors")({origin: true});
 
-export default functions.region('asia-northeast1').https.onRequest((request, response) => {
+export default functions.region("asia-northeast1").https.onRequest((request, response) => {
   cors(request, response, () => {
     console.log(request.body);
       let res;
@@ -19,13 +19,13 @@ export default functions.region('asia-northeast1').https.onRequest((request, res
       const call = request.body.call;
       admin.auth().verifyIdToken(idToken)
           .then(function (decodedToken) {
-          const userRef = fireStore.collection('user').where('group', '==', decodedToken.group).where('uid', '==', uid);
+          const userRef = fireStore.collection("user").where("group", "==", decodedToken.group).where("uid", "==", uid);
           userRef.get().then(doc => {
               if (doc === null) {
-                  response.send('No such document!');
+                  response.send("No such document!");
               } else if (doc !== null) {
                 if(team !== null && grade !== null && teamPosition !== null){
-                  const setUserRef = fireStore.collection('user').doc(doc.docs[0].id);
+                  const setUserRef = fireStore.collection("user").doc(doc.docs[0].id);
                   setUserRef.update({
                     name: family + first,
                     family: family,
@@ -46,19 +46,19 @@ export default functions.region('asia-northeast1').https.onRequest((request, res
                       teamPosition: teamPosition,
                       age: age,
                       age_turn: age_turn,
-                      position: 'scout',
+                      position: "scout",
                       group: decodedToken.group,
                       grade: grade
                     }).then(function() {
-                      res = 'success';
+                      res = "success";
                       response.send(res);
                     }).catch(function(){
-                      res = 'error';
+                      res = "error";
                       response.send(res);
                     })}
                   ).catch();
                 } else if (team !== null && grade !== null){
-                  const setUserRef = fireStore.collection('user').doc(doc.docs[0].id);
+                  const setUserRef = fireStore.collection("user").doc(doc.docs[0].id);
                   setUserRef.update({
                     name: family + first,
                     family: family,
@@ -77,19 +77,19 @@ export default functions.region('asia-northeast1').https.onRequest((request, res
                       team: team,
                       age: age,
                       age_turn: age_turn,
-                      position: 'scout',
+                      position: "scout",
                       group: decodedToken.group,
                       grade: grade
                     }).then(function() {
-                      res = 'success';
+                      res = "success";
                       response.send(res);
                     }).catch(function(){
-                      res = 'error';
+                      res = "error";
                       response.send(res);
                     })}
                   ).catch();
                 } else {
-                  const setUserRef = fireStore.collection('user').doc(doc.docs[0].id);
+                  const setUserRef = fireStore.collection("user").doc(doc.docs[0].id);
                     setUserRef.update({
                       name: family + first,
                       family: family,
@@ -103,13 +103,13 @@ export default functions.region('asia-northeast1').https.onRequest((request, res
                         first: first,
                         call: call,
                         age: age,
-                        position: 'scout',
+                        position: "scout",
                         group: decodedToken.group
                       }).then(function() {
-                        res = 'success';
+                        res = "success";
                         response.send(res);
                       }).catch(function(){
-                        res = 'error';
+                        res = "error";
                         response.send(res);
                       })}
                     ).catch();
@@ -117,12 +117,12 @@ export default functions.region('asia-northeast1').https.onRequest((request, res
               }
           })
               .catch(err => {
-              res = 'error';
+              res = "error";
               response.send(res);
           });
       }).catch(function (error) {
           // Handle error
-          res = 'error';
+          res = "error";
           response.send(res);
       });
   });

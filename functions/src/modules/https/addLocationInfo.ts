@@ -5,7 +5,7 @@ const fireStore = admin.firestore();
 
 const runtimeOpts = {
   timeoutSeconds: 540,
-  memory: "1GB" as "1GB",
+  memory: "1GB" as const,
 };
 export default functions
   .runWith(runtimeOpts)

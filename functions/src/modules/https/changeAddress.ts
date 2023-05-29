@@ -1,15 +1,15 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-var async = require("async");
+const async = require("async");
 const fireStore = admin.firestore();
 const { Storage } = require("@google-cloud/storage");
 const storage = new Storage();
-var bucket = storage.bucket("cubook-3c960.appspot.com");
+const bucket = storage.bucket("cubook-3c960.appspot.com");
 const cors = require("cors")({ origin: true });
 
 const runtimeOpts = {
   timeoutSeconds: 540,
-  memory: "1GB" as "1GB",
+  memory: "1GB" as const,
 };
 
 bucket.renameFolder = function (
@@ -40,13 +40,13 @@ export default functions
   .https.onRequest((request, response) => {
     cors(request, response, () => {
       let res;
-      let batch = fireStore.batch();
+      const batch = fireStore.batch();
       let count_category = 0;
 
-      const uid_from = ""; //移行元のuid
-      const uid = ""; //移行先のuid
-      const group = ""; //移行先のgroup
-      const group_from = ""; //移行元のgroup
+      const uid_from = ""; // 移行元のuid
+      const uid = ""; // 移行先のuid
+      const group = ""; // 移行先のgroup
+      const group_from = ""; // 移行元のgroup
 
       const userRef = fireStore
         .collection("user")
@@ -74,7 +74,7 @@ export default functions
           for (const category of listCollection) {
             const collectionRef = fireStore
               .collection(category)
-              .where( "group", "==", group_from)
+              .where("group", "==", group_from)
               .where("uid", "==", uid_from);
             collectionRef
               .get()
@@ -82,18 +82,18 @@ export default functions
                 let count = 0;
                 const docs = query.docs;
                 for (const collectionSnapshot of docs) {
-                  let map = collectionSnapshot.data();
+                  const map = collectionSnapshot.data();
                   map["uid"] = uid;
                   if (category !== "user" && category !== "activity_personal") {
-                    let dataSigned = collectionSnapshot.get("signed");
-                    for (let key in dataSigned) {
+                    const dataSigned = collectionSnapshot.get("signed");
+                    for (const key in dataSigned) {
                       const map_data = dataSigned[key]["data"];
                       if (map_data !== undefined) {
-                        for (let key_map in map_data) {
-                          let detail_data = map_data[key_map];
+                        for (const key_map in map_data) {
+                          const detail_data = map_data[key_map];
                           const type_data = detail_data["type"];
-                          if (type_data == "image" || type_data == "video") {
-                            let location_data = detail_data["body"].split("/");
+                          if (type_data === "image" || type_data === "video") {
+                            const location_data = detail_data["body"].split("/");
                             detail_data["body"] =
                               group + "/" + uid + "/" + location_data[2];
                           }
@@ -141,7 +141,7 @@ export default functions
                   count_category += 1;
                   console.log(category + " is empty");
                 }
-                if (listCollection.length == count_category) {
+                if (listCollection.length === count_category) {
                   batch
                     .commit()
                     .then(function () {
@@ -149,10 +149,7 @@ export default functions
                       try {
                         admin
                           .auth()
-                          .getUser(uid)
-                          .then(function (userRecord) {
-                          })
-                          .catch();
+                          .getUser(uid).then().catch();
                       } catch (e) {
                         console.log(`エラー発生 ${e}`);
                         console.log(uid);

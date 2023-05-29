@@ -28,6 +28,7 @@
     "rules": "storage.rules"
   },
   "extensions": {
-    "firestore-send-email": "firebase/firestore-send-email@0.1.25"
+    "firestore-send-email-noreply-dev": "firebase/firestore-send-email@0.1.25",
+    "firestore-send-email-noreply": "firebase/firestore-send-email@0.1.25"
   }
 }

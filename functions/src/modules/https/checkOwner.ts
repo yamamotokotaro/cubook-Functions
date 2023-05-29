@@ -8,14 +8,14 @@ const runtimeOpts = {
   memory: "256MB" as const,
 };
 
-export default functions.region('asia-northeast1').runWith(runtimeOpts).https.onRequest(async (request, response) => {
-    const userRef = fireStore.collection("user").where('position', '==', 'leader');
+export default functions.region("asia-northeast1").runWith(runtimeOpts).https.onRequest(async (request, response) => {
+    const userRef = fireStore.collection("user").where("position", "==", "leader");
     const userQuerySnapshot = await userRef.get();
     const userDocuments = userQuerySnapshot.docs;
     let batch = fireStore.batch();
     let count = 0;
     for(const userDocumentSnapshot of userDocuments){
-        const isAdmin = userDocumentSnapshot.get('admin');
+        const isAdmin = userDocumentSnapshot.get("admin");
         if(!isAdmin){
             batch.update(
                 userDocumentSnapshot.ref,
@@ -35,5 +35,5 @@ export default functions.region('asia-northeast1').runWith(runtimeOpts).https.on
     if (count >0){
       await batch.commit();
     }
-    response.send('success');
+    response.send("success");
 });

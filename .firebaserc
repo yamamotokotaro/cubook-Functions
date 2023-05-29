@@ -3,5 +3,19 @@
     "default": "cubook-dev",
     "dev": "cubook-dev",
     "prod": "cubook-3c960"
+  },
+  "targets": {},
+  "etags": {
+    "cubook-dev": {
+      "extensionInstances": {
+        "firestore-send-email-noreply-dev": "60a8d42b7d02dff5d41b9db1f559820daab2d4040a8313a74b2e79815856ec89"
+      }
+    },
+    "cubook-3c960": {
+      "extensionInstances": {
+        "firestore-send-email-noreply": "cb8522f4adf2c6bb3690f2f9a1c346e781699aa45b29d99a2f17ecaeb7c9af42",
+        "firestore-send-email": "a94cf5d0d2fa75add747b1e7bfc7f0efda4da656a019576070eceb31d30d4a53"
+      }
+    }
   }
 }

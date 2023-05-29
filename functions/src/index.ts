@@ -10,7 +10,7 @@ const funcs: any = {
   deleteGroupAccount_https: "./modules/https/deleteGroupAccount",
   inviteGroup: "./modules/https/inviteGroup",
   joinGroup: "./modules/https/joinGroup",
-  restoreCount: "./modules/https/restoreCount",
+  // restoreCount: "./modules/https/restoreCount",
   sendMigration: "./modules/https/sendMigration",
   executeMigration: "./modules/https/executeMigration",
   rejectMigration: "./modules/https/rejectMigration",

@@ -4,7 +4,7 @@ const fireStore = admin.firestore();
 
 const runtimeOpts = {
   timeoutSeconds: 540,
-  memory: "2GB" as "2GB",
+  memory: "2GB" as const,
 };
 
 export default functions
@@ -23,8 +23,7 @@ export default functions
       .then(async (doc) => {
         const documents = doc.docs;
         user_length = documents.length;
-        for (let i = 0; i < documents.length; i++) {
-          const snapshot = documents[i];
+        for (const snapshot of documents) {
           const types = [
             "risu",
             "usagi",
@@ -45,10 +44,9 @@ export default functions
               .where("uid", "==", snapshot.get("uid"));
             const doc_restore = restoreRef.get();
             const documents_restore = (await doc_restore).docs;
-            let signCount: { [index: string]: any } = {};
-            for (let j = 0; j < documents_restore.length; j++) {
-              let count_part: number = 0;
-              const snapshot_restore = documents_restore[j];
+            const signCount: { [index: string]: any } = {};
+            for (const snapshot_restore of documents_restore) {
+              let count_part = 0;
               const page = snapshot_restore.get("page");
               const signed = snapshot_restore.get("signed");
               if (signed !== undefined) {
@@ -67,20 +65,20 @@ export default functions
             batch.update(setUserRef, { [type]: signCount });
             batchCounter++;
             if (batchCounter >= 490) {
-              batch.commit();
+              await batch.commit();
               batch = fireStore.batch();
               batchCounter = 0;
             }
           }
           user_count++;
-          if (user_count % 20 == 0) {
+          if (user_count % 20 === 0) {
             console.log(
               String(user_count) + "/" + String(user_length) + " completed"
             );
           }
         }
-        if (batchCounter != 0) {
-          batch.commit();
+        if (batchCounter !== 0) {
+          await batch.commit();
         }
         response.send("success");
       })

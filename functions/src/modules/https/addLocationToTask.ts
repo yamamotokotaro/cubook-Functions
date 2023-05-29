@@ -102,7 +102,7 @@ const challenge_title: Array<string> = [
 
 const runtimeOpts = {
   timeoutSeconds: 540,
-  memory: "1GB" as "1GB",
+  memory: "1GB" as const,
 };
 export default functions
   .runWith(runtimeOpts)
@@ -110,9 +110,9 @@ export default functions
   .https.onRequest(async (request, response) => {
     const searchRef = fireStore.collection("task").orderBy("date");
     const searchDocs = (await searchRef.get()).docs;
-    let taskLocationedDatas = [];
+    const taskLocationedDatas = [];
     let batch = fireStore.batch();
-    let batchCounter = 0;
+    const batchCounter = 0;
     for (const searchDoc of searchDocs) {
       const group = searchDoc.get("group");
       const type = searchDoc.get("type");
@@ -174,14 +174,14 @@ export default functions
         }
       }
 
-      if (batchCounter % 490 == 0) {
+      if (batchCounter % 490 === 0) {
         batch.commit().then().catch();
         batch = fireStore.batch();
       }
     }
     await batch.commit();
     // #2 Converting the object to JSON...
-    let json = JSON.stringify(taskLocationedDatas);
+    const json = JSON.stringify(taskLocationedDatas);
     response.send(json);
     console.log(batchCounter);
   });

@@ -1,9 +1,9 @@
-import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
+import * as functions from "firebase-functions";
+import * as admin from "firebase-admin";
 const fireStore = admin.firestore();
-const cors = require('cors')({origin: true});
+const cors = require("cors")({origin: true});
 
-export default functions.region('asia-northeast1').https.onRequest((request, response) => {
+export default functions.region("asia-northeast1").https.onRequest((request, response) => {
   cors(request, response, () => {
     let res;
     const idToken = request.body.idToken;
@@ -11,9 +11,9 @@ export default functions.region('asia-northeast1').https.onRequest((request, res
     let grade = request.body.grade;
     admin.auth().verifyIdToken(idToken)
         .then(function (decodedToken) {
-        const createRef = fireStore.collection('group').doc();
+        const createRef = fireStore.collection("group").doc();
         if(grade === null){
-          grade = 'cub';
+          grade = "cub";
         }
         createRef.set({
             name: groupName,
@@ -21,15 +21,15 @@ export default functions.region('asia-northeast1').https.onRequest((request, res
         }).then(doc => {
             createRef.id;
             if (doc === null) {
-                response.send('No such document!');
+                response.send("No such document!");
             } else if (doc !== null) {
                 const group = createRef.id;
                 const uid = decodedToken.uid;
                 const first = request.body.first;
                 const family = request.body.family;
-                const call = 'さん';
-                const age = 'leader';
-                const position = 'leader';
+                const call = "さん";
+                const age = "leader";
+                const position = "leader";
                 admin.auth().setCustomUserClaims(uid, {
                   name: family + first,
                   group: group,
@@ -43,7 +43,7 @@ export default functions.region('asia-northeast1').https.onRequest((request, res
                   grade: grade,
                   groupName: groupName
                 }).then(function() {
-                  const citiesRef = fireStore.collection('user');
+                  const citiesRef = fireStore.collection("user");
                   citiesRef.doc().set({
                     name: family + first,
                     group: group,
@@ -58,23 +58,23 @@ export default functions.region('asia-northeast1').https.onRequest((request, res
                     grade: grade,
                     groupName: groupName
                   }).then(function(){
-                    res = 'success';
+                    res = "success";
                     response.send(res);}
                   ).catch();
                   // Tell client to refresh token on user.
                 }).catch(function(error) {
-                  res = 'error';    
+                  res = "error";    
                   response.send(res);    // Handle error
                 });
             }
         })
             .catch(err => {
-            res = 'not found';
+            res = "not found";
             response.send(res);
         });
     }).catch(function (error) {
         // Handle error
-        res = 'not found';
+        res = "not found";
         response.send(res);
     });
   });
