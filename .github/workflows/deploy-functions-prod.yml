@@ -36,4 +36,4 @@ jobs:
           args: deploy
         env:
           GCP_SA_KEY: ${{ steps.cat_key.outputs.key }}
-          PROJECT_ID: trashlens-prod
+          PROJECT_ID: cubook-3c960
