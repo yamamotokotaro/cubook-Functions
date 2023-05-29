@@ -1,6 +1,6 @@
 <br>
 <p align="center">
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/25360586/241749437-76986c82-b443-4a9c-b419-2148c94a758f.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230529%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230529T141251Z&X-Amz-Expires=300&X-Amz-Signature=7e6609d184de8e26d533b7c29a4042528c7f6fa561dd7462a3c82becc35227eb&X-Amz-SignedHeaders=host&actor_id=25360586&key_id=0&repo_id=646429908" alt="Slidev" height="200" width="200"/>
+<img src="https://storage.googleapis.com/cubook-content-delivery/cubook_github_readme_icon.png" alt="cubook" height="200" width="200"/>
 </p>
 <h2 align="center">
   cubook-backend
