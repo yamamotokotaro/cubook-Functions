@@ -18,4 +18,4 @@
 cubook-backendへコードベースで貢献することに興味がある場合は、環境構築の方法などが記述されている[貢献の仕方](https://github.com/yamamotokotaro/cubook-backend/wiki/%E8%B2%A2%E7%8C%AE%E3%81%AE%E4%BB%95%E6%96%B9)をご覧ください。
 
 ## つながる
-[GitHub Discussion](https://github.com/yamamotokotaro/cubook-backend/discussions)でつながりましょう！
+[GitHub Discussion](https://github.com/yamamotokotaro/cubook/discussions)でチャットができます💬
