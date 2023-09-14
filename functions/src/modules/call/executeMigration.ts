@@ -45,7 +45,7 @@ export default functions.runWith(runtimeOpts).region("asia-northeast1").https.on
         const userDocs = await userRef.get();
         const userSnapshot = userDocs.docs[0];
         const groupName = userSnapshot.get("groupName");
-        const listCollection = ["risu", "usagi", "sika", "kuma", "tukinowa", "challenge", "syokyu", "nikyu", "ikkyu", "kiku", "hayabusa", "fuji", "user", "activity_personal"];
+        const listCollection = ["risu", "usagi", "sika", "kuma", "tukinowa", "challenge", "syokyu", "nikyu", "ikkyu", "kiku", "hayabusa", "fuji", "gino", "user", "activity_personal"];
         for (const category of listCollection) {
             const collectionRef = fireStore.collection(category).where("group", "==", group_from).where("uid", "==", uid);
             const groupDocs = await collectionRef.get();
