@@ -66,3 +66,4 @@ emulators.backup/
 # dotenv environment variables file
 .env
 .DS_Store
+functions/src/modules/https/getAddress.ts
